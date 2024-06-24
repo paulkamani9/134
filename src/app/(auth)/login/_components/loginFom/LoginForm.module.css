@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 16px;
+}
+.form > input {
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  font-size: 16px;
+  border-radius: var(--border-radius);
+  border: var(--borders);
+}
+
+.form > button {
+  padding: var(--button-padding);
+  background-color: var(--primary-button-color);
+  border: var(--borders);
+  letter-spacing: var(--letter-spacing);
+  font-size: 16px;
+  box-sizing: border-box;
+  border-radius: var(--border-radius);
+  font: var(--font1);
+  font-weight: 600;
+  margin-top: 16px;
+}

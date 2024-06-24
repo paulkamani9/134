@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  product  Product[]
+  category Category[]
+  list     List[]
+}
+
+model Product {
+  id         Int        @id @default(autoincrement())
+  name       String
+  price      Decimal
+  imagePath  String
+  label      ProductLabel[]
+  listitem   ListItem?
+  userId     Int
+  user       User       @relation(fields: [userId], references: [id])
+  categoryId Int?
+  category   Category?  @relation(fields: [categoryId], references: [id])
+}
+
+model ProductLabel {
+  id        Int        @id @default(autoincrement())
+  name      String
+  product   Product[]
+}
+
+model Category {
+  id        Int       @id @default(autoincrement())
+  name      String
+  label     CategoryLabel[]
+  userId    Int
+  user      User      @relation(fields: [userId], references: [id])
+  product   Product[]
+}
+
+model CategoryLabel {
+  id        Int        @id @default(autoincrement())
+  name      String
+  category  Category[]
+}
+
+model List {
+  id         Int        @id @default(autoincrement())
+  name       String
+  listitems  ListItem[]
+  userId     Int
+  user       User       @relation(fields: [userId], references: [id])
+  published  Boolean    @default(false)
+}
+
+model ListItem {
+  quantity   Int      @default(1)
+  productId  Int      @unique
+  product    Product  @relation(fields: [productId], references: [id])
+  listId     Int
+  list       List     @relation(fields: [listId], references: [id])
+  @@id([productId, listId])
+}
