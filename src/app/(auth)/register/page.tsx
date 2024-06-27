@@ -20,7 +20,7 @@ const LoginPage = () => {
         <GoogleSignIn />
         <RegisterForm />
         <span>
-          Registered? <Link href={"/login"}>Login In</Link>
+          Registered? <Link href={"/login"}>Login</Link>
         </span>
       </div>
     </main>
